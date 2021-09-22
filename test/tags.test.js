@@ -117,6 +117,14 @@ describe('Tags', () => {
       assert.equal(tag.fields.extraDetails, 'NL72RABO0104510633');
     });
 
+    it('should create tag 61 (with correct entryDate from previous year)', () => {
+      const str = '2101011230CR0,00NCHGNONREF';
+      const tag = tf.createTag('61', null, str);
+      assert.equal(tag.fields.date.toISOString().substr(0,10), '2021-01-01');
+      assert.equal(tag.fields.entryDate.toISOString().substr(0,10), '2020-12-30');
+      assert.equal(tag.fields.amount, 0.00);
+    });
+
     it('should create tag 86 (TransactionDetails)', () => {
       const str = 'Some text here';
       const tag = tf.createTag('86', null, str);
